@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agenda>
+    <medico>
+        <nome>Paulo Silva</nome>
+        <crm>123456</crm>
+        <especialidade>Ortopedista</especialidade>
+    </medico>
+
+    <medico>
+        <nome>Marina Silva</nome>
+        <crm>789456</crm>
+        <especialidade>Oftalmologista</especialidade>
+    </medico>
+</agenda>

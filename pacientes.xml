@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agenda>
+    <paciente>
+        <nome>Joao Victor</nome>
+        <idade>24</idade>
+        <sexo>M</sexo>
+        <cpf>04119850277</cpf>
+    </paciente>
+    <paciente>
+        <nome>Maria Silva</nome>
+        <idade>35</idade>
+        <sexo>F</sexo>
+        <cpf>78945625488</cpf>
+    </paciente>
+    <paciente>
+        <nome>Pedro</nome>
+        <idade>40</idade>
+        <sexo>M</sexo>
+        <cpf>98765432100</cpf>
+    </paciente>
+</agenda>

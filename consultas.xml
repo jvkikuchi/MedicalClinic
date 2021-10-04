@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<agenda>
+    <consulta>
+        <paciente>Paulo Silva</paciente>
+        <medico>123456</medico>
+        <horario>Ortopedista</horario>
+    </consulta>
+
+    <consulta>
+        <paciente>Marina Silva</paciente>
+        <medico>789456</medico>
+        <horario>Oftalmologista</horario>
+    </consulta>
+</agenda>

@@ -144,6 +144,6 @@ void salvar(int type) {
 string informar(string variavel) {
     string elem;
     cout << variavel + ": ";
-    cin >> elem;
+    getline(cin >> ws, elem);
     return elem;
 }

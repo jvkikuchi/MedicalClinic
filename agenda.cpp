@@ -175,13 +175,10 @@ class Agenda {
 
         void removerPaciente(string cpf) {
             bool found = false;
-            // o (it) é um apontador para o endereco do paciente no vector<Paciente>
-            // pois o erase funciona somente com enderecos, e nao com objetos,
-            // ou seja, ele acessa o endereco de memoria no vector, no caso do ++it, ele informa pro
-            // it passar pro proximo endereco dentro do vector
-            for (vector<Paciente>::iterator it = agendaPacientes.begin(); it != agendaPacientes.end(); ++it) {
-                if (!found && it->getCpf() == cpf) {
-                    agendaPacientes.erase(it);
+            for (int i = 0; i < agendaPacientes.size(); i++) {
+                if (!found && agendaPacientes[i].getCpf() == cpf) {
+                    agendaPacientes.erase(agendaPacientes.begin() + i);
+                    cout << "Registro excluido com sucesso." << endl;
                     found = true;
                 }
             }
@@ -192,9 +189,10 @@ class Agenda {
 
         void removerMedico(string crm) {
             bool found = false;
-            for (vector<Medico>::iterator it = agendaMedicos.begin(); it != agendaMedicos.end(); ++it) {
-                if (!found && it->getCrm() == crm) {
-                    agendaMedicos.erase(it);
+            for (int i = 0; i < agendaMedicos.size(); i++) {
+                if (!found && agendaMedicos[i].getCrm() == crm) {
+                    agendaMedicos.erase(agendaMedicos.begin() + i);
+                    cout << "Registro excluido com sucesso." << endl;
                     found = true;
                 }
             }
@@ -205,9 +203,10 @@ class Agenda {
 
         void removerConsulta(string id) {
             bool found = false;
-            for (vector<Consulta>::iterator it = agendaConsultas.begin(); it != agendaConsultas.end(); ++it) {
-                if (!found && it->getId() == id) {
-                    agendaConsultas.erase(it);
+            for (int i = 0; i < agendaConsultas.size(); i++) {
+                if (!found && agendaConsultas[i].getId() == id) {
+                    agendaConsultas.erase(agendaConsultas.begin() + i);
+                    cout << "Registro excluido com sucesso." << endl;
                     found = true;
                 }
             }

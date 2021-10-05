@@ -14,6 +14,7 @@
     "ESCOLHA",
     "especialidade",
     "Exibir",
+    "frase",
     "funciona",
     "gravar",
     "idade",
@@ -28,6 +29,7 @@
     "pessoa",
     "pois",
     "Queiroz",
+    "Registro",
     "Retornar",
     "Sair",
     "sexo",
@@ -43,6 +45,7 @@
     "utility": "cpp",
     "xmemory0": "cpp",
     "xtr1common": "cpp",
-    "xutility": "cpp"
+    "xutility": "cpp",
+    "vector": "cpp"
   }
 }

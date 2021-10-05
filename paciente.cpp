@@ -1,63 +1,57 @@
-#include <iostream>
 #include <string>
 
 using namespace std;
 
-
-class Paciente{
+class Paciente {
     private:
         string nome;
         int idade;
         string sexo;
         string cpf;
 
-
     public:
 
-        Paciente(){
+        Paciente() {
             init();
         }
 
-        void init(){
+        void init() {
             nome = "";
             sexo = "?";
             idade = 0;
             cpf = "00000000000";
         }
 
-        void setNome(string nomePaciente){
+        void setNome(string nomePaciente) {
             nome = nomePaciente;
-
         }
 
-        string  getNome(){
+        string  getNome() {
             return nome;
         }
 
-        void setIdade(int valIdade){
+        void setIdade(int valIdade) {
             idade = valIdade;
         }
 
-        int getIdade(){
+        int getIdade() {
             return idade;
         }
 
-        void setSexo(string valSexo){
+        void setSexo(string valSexo) {
             sexo = valSexo;
         }
 
-        string getSexo(){
+        string getSexo() {
             return sexo;
         }
 
-        void setCpf(string valCpf){
+        void setCpf(string valCpf) {
             cpf = valCpf;
         }
 
-        string getCpf(){
+        string getCpf() {
             return cpf;
         }
-
-
 
 };

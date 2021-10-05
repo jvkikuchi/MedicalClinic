@@ -1,10 +1,9 @@
-#include <iostream>
 #include <string>
 
 using namespace std;
 
+class Medico {
 
-class Medico{
     private:
         string nome;
         string crm;
@@ -12,38 +11,38 @@ class Medico{
 
     public:
 
-        Medico(){
+        Medico() {
             init();
         }
 
-        void init(){
+        void init() {
             nome = "";
             crm = "";
             especialidade = "";
         }
 
-        void setNome(string nomeMedico){
+        void setNome(string nomeMedico) {
             nome = nomeMedico;
         }
 
-        string getNome(){
+        string getNome() {
             return nome;
         }
         
-        void setCrm(string valorCrm){
+        void setCrm(string valorCrm) {
             crm = valorCrm;
         }
 
-        string  getCrm(){
-            return crm;          
+        string getCrm() {
+            return crm;
         }
 
-        void setEspecialidade(string valorEspecialidade){
+        void setEspecialidade(string valorEspecialidade) {
             especialidade = valorEspecialidade;
         }
 
-        string  getEspecilidade(){
-            return especialidade;         
+        string getEspecialidade() {
+            return especialidade;
         }
 
 };

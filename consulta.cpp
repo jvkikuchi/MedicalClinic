@@ -1,55 +1,73 @@
-#include <iostream>
 #include <string>
-#include "paciente.cpp"
-#include "medico.cpp"
-
 
 using namespace std;
 
+class Consulta {
 
-class Consulta{
     private:
-        Paciente paciente;
-        Medico medico;
+        string id;
+        string cpf;
+        string crm;
         string data;
-        string hora;
+        string horario;
 
     public:
-
-        Paciente getPaciente(){
-            return paciente;
+        string getId() {
+            return id;
         }
 
-        void setPaciente(Paciente varPaciente){
-            paciente = varPaciente;
+        void setId(string id) {
+            this->id = id;
         }
 
-        Medico getMedico(){
-            return medico;
+        string getCpf() {
+            return cpf;
         }
 
-        void setMedico(Medico varMedico){
-            medico = varMedico;
+        void setCpf(string cpf) {
+            this->cpf = cpf;
         }
 
-        string toString(){
-            return paciente.getNome() + " " + medico.getNome();
+        string getCrm() {
+            return crm;
         }
 
-        void setHora(string valHora){
-            hora = valHora;
+        void setCrm(string crm) {
+            this->crm = crm;
         }
 
-        string getHora(){
-            return hora;
-
-        }
-
-        void setData(string valData){
-            data = valData;
-        }
-
-        string getData(){
+        string getData() {
             return data;
-        }      
+        }
+
+        void setData(string data) {
+            this->data = data;
+        }
+
+        string getHorario() {
+            return horario;
+        }
+
+        void setHorario(string horario) {
+            this->horario = horario;
+        }
+
+        void marcarConsulta(string id, string cpf, string crm, string data, string horario) {
+            this->id = id;
+            this->cpf = cpf;
+            this->crm = crm;
+            this->data = data;
+            this->horario = horario;
+        }
+
+        string toString() {
+            string output = "";
+            output += "\nNumero da Consulta: " + getId();
+            output += "\nCPF do paciente: " + getCpf();
+            output += "\nCRM do medico: " + getCrm();
+            output += "\nData: " + getData();
+            output += "\nHorario: " + getHorario();
+            return output;
+        }
+
 };

@@ -1,21 +1,32 @@
 #include <iostream>
 #include <string>
-#include "consulta.cpp"
 #include <vector>
 #include <fstream>
+#include "consulta.cpp"
+#include "paciente.cpp"
+#include "medico.cpp"
 #include "utils.h"
 
 using namespace std;
 
-class Agenda{
+class Agenda {
     public:
-
-        Agenda(){
+        Agenda() {
             carregarPacientes();
+            carregarMedicos();
+            carregarConsultas();
         }
 
         void armazenarPaciente(Paciente paciente) {
-            agenda.push_back(paciente);
+            agendaPacientes.push_back(paciente);
+        }
+
+        void armazenarMedico(Medico medico) {
+            agendaMedicos.push_back(medico);
+        }
+
+        void armazenarConsulta(Consulta consulta) {
+            agendaConsultas.push_back(consulta);
         }
 
         void buscarPaciente(string regex) {
@@ -24,7 +35,7 @@ class Agenda{
                 return;
             }
             bool found = false;
-            for(auto paciente : agenda) {
+            for(auto paciente : agendaPacientes) {
                 if (toLowerCase(paciente.getNome()).find(toLowerCase(regex)) != string::npos) {
                     print(paciente);
                     found = true;
@@ -35,9 +46,43 @@ class Agenda{
             }
         }
 
+        void buscarMedico(string regex) {
+            if (regex.length() < 3) {
+                cout << "O termo de busca deve conter pelo menos 3 caracteres." << endl;
+                return;
+            }
+            bool found = false;
+            for(auto medico : agendaMedicos) {
+                if (toLowerCase(medico.getNome()).find(toLowerCase(regex)) != string::npos) {
+                    print(medico);
+                    found = true;
+                }
+            }
+            if (!found) {
+                cout << "Nenhum registro encontrado." << endl;
+            }
+        }
+
+        void buscarConsulta(string regex) {
+            if (regex.length() < 3) {
+                cout << "O termo de busca deve conter pelo menos 3 caracteres." << endl;
+                return;
+            }
+            bool found = false;
+            for(auto consulta : agendaConsultas) {
+                if (consulta.getId().find(regex) != string::npos) {
+                    print(consulta);
+                    found = true;
+                }
+            }
+            if (!found) {
+                cout << "Nenhum registro encontrado." << endl;
+            }
+        }
+
         void editarPaciente(string regex) {
             bool found = false;
-            for(auto &paciente : agenda) {
+            for(auto &paciente : agendaPacientes) {
                 if (toLowerCase(paciente.getCpf()).find(toLowerCase(regex)) != string::npos) {
                     print(paciente);
                     paciente.setNome(informar("\nNovo nome"));
@@ -52,29 +97,117 @@ class Agenda{
             }
         }
 
+        void editarMedico(string regex) {
+            bool found = false;
+            for(auto &medico : agendaMedicos) {
+                if (toLowerCase(medico.getCrm()).find(toLowerCase(regex)) != string::npos) {
+                    print(medico);
+                    medico.setNome(informar("\nNovo nome"));
+                    medico.setCrm(informar("Novo CRM"));
+                    medico.setEspecialidade(informar("Nova especialidade"));
+                    found = true;
+                }
+            }
+            if (!found) {
+                cout << "Nenhum registro encontrado." << endl;
+            }
+        }
+
+        void editarConsulta(string regex) {
+            bool found = false;
+            for(auto &consulta : agendaConsultas) {
+                if (consulta.getId().find(regex) != string::npos) {
+                    print(consulta);
+                    consulta.setId(informar("\nNovo ID"));
+                    consulta.setCpf(informar("Novo CPF do paciente"));
+                    consulta.setCrm(informar("Novo CRM do medico"));
+                    consulta.setData(informar("Nova data"));
+                    consulta.setHorario(informar("Nova horario"));
+                    found = true;
+                }
+            }
+            if (!found) {
+                cout << "Nenhum registro encontrado." << endl;
+            }
+        }
+
         void listarPacientes() {
-            for (auto paciente : agenda) {
+            for (auto paciente : agendaPacientes) {
                 print(paciente);
             }
         }
 
+        void listarMedicos() {
+            for (auto medico : agendaMedicos) {
+                print(medico);
+            }
+        }
+
+        void listarConsultas() {
+            for (auto consulta : agendaConsultas) {
+                print(consulta);
+            }
+        }
+
         void print(Paciente paciente) {
-            string buffer = "\nNome: " + paciente.getNome();
-            buffer += "\nIdade: " + to_string(paciente.getIdade());
-            buffer += "\nSexo: " + paciente.getSexo();
-            buffer += "\nCpf: " + paciente.getCpf();
-            cout << buffer << endl;
+            string output = "\nNome: " + paciente.getNome();
+            output += "\nIdade: " + to_string(paciente.getIdade());
+            output += "\nSexo: " + paciente.getSexo();
+            output += "\nCpf: " + paciente.getCpf();
+            cout << output << endl;
+        }
+
+        void print(Medico medico) {
+            string output = "\nNome: " + medico.getNome();
+            output += "\nCRM: " + medico.getCrm();
+            output += "\nEspecialidade: " + medico.getEspecialidade();
+            cout << output << endl;
+        }
+
+        void print(Consulta consulta) {
+            string output = "\nID: " + consulta.getId();
+            output += "\nCPF do paciente: " + consulta.getCpf();
+            output += "\nCRM do medico: " + consulta.getCrm();
+            output += "\nData: " + consulta.getData();
+            output += "\nHorario: " + consulta.getHorario();
+            cout << output << endl;
         }
 
         void removerPaciente(string cpf) {
             bool found = false;
             // o (it) é um apontador para o endereco do paciente no vector<Paciente>
-            // pois o erase funciona somente com enderecos, e nao com objetois
+            // pois o erase funciona somente com enderecos, e nao com objetos,
             // ou seja, ele acessa o endereco de memoria no vector, no caso do ++it, ele informa pro
             // it passar pro proximo endereco dentro do vector
-            for (vector<Paciente>::iterator it = agenda.begin(); it != agenda.end(); ++it) {
+            for (vector<Paciente>::iterator it = agendaPacientes.begin(); it != agendaPacientes.end(); ++it) {
                 if (!found && it->getCpf() == cpf) {
-                    agenda.erase(it);
+                    agendaPacientes.erase(it);
+                    found = true;
+                }
+            }
+            if (!found) {
+                cout << "Nenhum registro encontrado." << endl;
+            }
+        }
+
+        void removerMedico(string crm) {
+            bool found = false;
+            for (vector<Medico>::iterator it = agendaMedicos.begin(); it != agendaMedicos.end(); ++it) {
+                if (!found && it->getCrm() == crm) {
+                    agendaMedicos.erase(it);
+                    found = true;
+                }
+            }
+            if (!found) {
+                cout << "Nenhum registro encontrado." << endl;
+            }
+        }
+
+        void removerConsulta(string id) {
+            bool found = false;
+            for (vector<Consulta>::iterator it = agendaConsultas.begin(); it != agendaConsultas.end(); ++it) {
+                if (!found && it->getId() == id) {
+                    agendaConsultas.erase(it);
                     found = true;
                 }
             }
@@ -83,8 +216,52 @@ class Agenda{
             }
         }
        
-        void gravarArquivo() {
-            saveFile();
+        void salvarPacientes() {
+            ofstream arquivo("pacientes.xml");
+            arquivo << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+            arquivo << "<agenda>\n";
+            for (auto paciente : agendaPacientes) {
+                arquivo << tabs(1) + "<paciente>\n";
+                arquivo << tabs(2) + "<nome>" + paciente.getNome() + "</nome>\n";
+                arquivo << tabs(2) + "<idade>" + to_string(paciente.getIdade()) + "</idade>\n";
+                arquivo << tabs(2) + "<sexo>" + paciente.getSexo() + "</sexo>\n";
+                arquivo << tabs(2) + "<cpf>" + paciente.getCpf() + "</cpf>\n";
+                arquivo << tabs(1) + "</paciente>\n";
+            }
+            arquivo << "</agenda>\n";
+            arquivo.close();
+        }
+
+        void salvarMedicos() {
+            ofstream arquivo("medicos.xml");
+            arquivo << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+            arquivo << "<agenda>\n";
+            for (auto medico : agendaMedicos) {
+                arquivo << tabs(1) + "<medico>\n";
+                arquivo << tabs(2) + "<nome>" + medico.getNome() + "</nome>\n";
+                arquivo << tabs(2) + "<crm>" + medico.getCrm() + "</crm>\n";
+                arquivo << tabs(2) + "<especialidade>" + medico.getEspecialidade() + "</especialidade>\n";
+                arquivo << tabs(1) + "</medico>\n";
+            }
+            arquivo << "</agenda>\n";
+            arquivo.close();
+        }
+
+        void salvarConsultas() {
+            ofstream arquivo("consultas.xml");
+            arquivo << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+            arquivo << "<agenda>\n";
+            for (auto consulta : agendaConsultas) {
+                arquivo << tabs(1) + "<consulta>\n";
+                arquivo << tabs(2) + "<id>" + consulta.getId() + "</id>\n";
+                arquivo << tabs(2) + "<cpf>" + consulta.getCpf() + "</cpf>\n";
+                arquivo << tabs(2) + "<crm>" + consulta.getCrm() + "</crm>\n";
+                arquivo << tabs(2) + "<data>" + consulta.getData() + "</data>\n";
+                arquivo << tabs(2) + "<horario>" + consulta.getHorario() + "</horario>\n";
+                arquivo << tabs(1) + "</consulta>\n";
+            }
+            arquivo << "</agenda>\n";
+            arquivo.close();
         }
 
         string informar(string variavel) {
@@ -95,8 +272,12 @@ class Agenda{
         }
 
     private:
-    vector<Paciente> agenda;
+    vector<Paciente> agendaPacientes;
+    vector<Medico> agendaMedicos;
+    vector<Consulta> agendaConsultas;
     Paciente paciente;
+    Medico medico;
+    Consulta consulta;
     void carregarPacientes() {
         ifstream arquivo("pacientes.xml");
         string line;
@@ -138,26 +319,84 @@ class Agenda{
             }
             
             else if (line.find("</paciente>") != string::npos) {
-                agenda.push_back(paciente);
+                agendaPacientes.push_back(paciente);
                 openRegister = false;
             }
         }
         arquivo.close();
     }
 
-    void saveFile() {
-        ofstream arquivo("pacientes.xml");
-        arquivo << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-        arquivo << "<agenda>\n";
-        for (auto paciente : agenda) {
-            arquivo << tabs(1) + "<paciente>\n";
-            arquivo << tabs(2) + "<nome>" + paciente.getNome() + "</nome>\n";
-            arquivo << tabs(2) + "<idade>" + to_string(paciente.getIdade()) + "</idade>\n";
-            arquivo << tabs(2) + "<sexo>" + paciente.getSexo() + "</sexo>\n";
-            arquivo << tabs(2) + "<cpf>" + paciente.getCpf() + "</cpf>\n";
-            arquivo << tabs(1) + "</paciente>\n";
+    void carregarMedicos() {
+        ifstream arquivo("medicos.xml");
+        string line;
+        bool openRegister = false;
+        while(getline(arquivo,line)) {
+            trim(line);
+            if (line.find("<medico>") != string::npos) {
+                openRegister = true;
+            }
+            else if (line.find("<nome>") != string::npos && openRegister) {
+                line = replaceAll(line,"<nome>","");
+                line = replaceAll(line,"</nome>","");
+                medico.setNome(line);
+            }
+            else if (line.find("<crm>") != string::npos && openRegister) {
+                line = replaceAll(line,"<crm>","");
+                line = replaceAll(line,"</crm>","");
+                medico.setCrm(line);
+            }
+            else if (line.find("<especialidade>") != string::npos && openRegister) {
+                line = replaceAll(line,"<especialidade>","");
+                line = replaceAll(line,"</especialidade>","");
+                medico.setEspecialidade(line);
+            }
+            else if (line.find("</medico>") != string::npos) {
+                agendaMedicos.push_back(medico);
+                openRegister = false;
+            }
         }
-        arquivo << "</agenda>\n";
+        arquivo.close();
+    }
+
+    void carregarConsultas() {
+        ifstream arquivo("consultas.xml");
+        string line;
+        bool openRegister = false;
+        while(getline(arquivo,line)) {
+            trim(line);
+            if (line.find("<consulta>") != string::npos) {
+                openRegister = true;
+            }
+            else if (line.find("<id>") != string::npos && openRegister) {
+                line = replaceAll(line,"<id>","");
+                line = replaceAll(line,"</id>","");
+                consulta.setId(line);
+            }
+            else if (line.find("<cpf>") != string::npos && openRegister) {
+                line = replaceAll(line,"<cpf>","");
+                line = replaceAll(line,"</cpf>","");
+                consulta.setCpf(line);
+            }
+            else if (line.find("<crm>") != string::npos && openRegister) {
+                line = replaceAll(line,"<crm>","");
+                line = replaceAll(line,"</crm>","");
+                consulta.setCrm(line);
+            }
+            else if (line.find("<data>") != string::npos && openRegister) {
+                line = replaceAll(line,"<data>","");
+                line = replaceAll(line,"</data>","");
+                consulta.setData(line);
+            }
+            else if (line.find("<horario>") != string::npos && openRegister) {
+                line = replaceAll(line,"<horario>","");
+                line = replaceAll(line,"</horario>","");
+                consulta.setHorario(line);
+            }
+            else if (line.find("</consulta>") != string::npos) {
+                agendaConsultas.push_back(consulta);
+                openRegister = false;
+            }
+        }
         arquivo.close();
     }
 

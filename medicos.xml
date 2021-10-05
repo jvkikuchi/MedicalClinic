@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agenda>
     <medico>
-        <nome>Paulo Silva</nome>
-        <crm>123456</crm>
-        <especialidade>Ortopedista</especialidade>
+        <nome>Andrea Bastos de Carvalho Damasco</nome>
+        <crm>12345</crm>
+        <especialidade>Ortopedia</especialidade>
     </medico>
-
     <medico>
-        <nome>Marina Silva</nome>
-        <crm>789456</crm>
-        <especialidade>Oftalmologista</especialidade>
+        <nome>Eduardo Fonseca Guerra</nome>
+        <crm>23456</crm>
+        <especialidade>Oftalmologia</especialidade>
+    </medico>
+    <medico>
+        <nome>Helena Iasmin Junqueira</nome>
+        <crm>34567</crm>
+        <especialidade>Dermatologia</especialidade>
+    </medico>
+    <medico>
+        <nome>Kleber Lima de Menezes Nogueira</nome>
+        <crm>45678</crm>
+        <especialidade>Cardiologia</especialidade>
+    </medico>
+    <medico>
+        <nome>Olivia Paiva de Queiroz</nome>
+        <crm>56789</crm>
+        <especialidade>Neurologia</especialidade>
     </medico>
 </agenda>

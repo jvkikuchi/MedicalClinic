@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <agenda>
     <paciente>
-        <nome>Joao Victor</nome>
-        <idade>24</idade>
+        <nome>Antonio Bernardes Cavalcante</nome>
+        <idade>25</idade>
         <sexo>M</sexo>
-        <cpf>04119850277</cpf>
+        <cpf>12345678900</cpf>
     </paciente>
     <paciente>
-        <nome>Maria Silva</nome>
-        <idade>35</idade>
+        <nome>Danielle Evelyn Figueiras Gusmao</nome>
+        <idade>32</idade>
         <sexo>F</sexo>
-        <cpf>78945625488</cpf>
+        <cpf>98765432100</cpf>
     </paciente>
     <paciente>
-        <nome>Pedro</nome>
+        <nome>Hugo Ismael Juscelino Klemente</nome>
         <idade>40</idade>
         <sexo>M</sexo>
-        <cpf>98765432100</cpf>
+        <cpf>99988877766</cpf>
+    </paciente>
+    <paciente>
+        <nome>Laura Marques de Nunes Oliveira</nome>
+        <idade>56</idade>
+        <sexo>F</sexo>
+        <cpf>33344455566</cpf>
+    </paciente>
+    <paciente>
+        <nome>Pedro Quadros Rosa dos Santos</nome>
+        <idade>48</idade>
+        <sexo>M</sexo>
+        <cpf>12312312399</cpf>
     </paciente>
 </agenda>

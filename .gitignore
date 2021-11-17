@@ -1,2 +1,6 @@
 *.exe
+<<<<<<< HEAD
 dist/
+=======
+build/*
+>>>>>>> 25cd7d00993aa0b381578da780b98956fbc6e82c

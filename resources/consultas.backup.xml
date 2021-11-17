@@ -14,4 +14,11 @@
         <data>05/10/2021</data>
         <horario>13:00</horario>
     </consulta>
+    <consulta>
+        <id>202110041500</id>
+        <cpf>44455618788</cpf>
+        <crm>79845</crm>
+        <data>08/10/2021</data>
+        <horario>16:30</horario>
+    </consulta>
 </agenda>
